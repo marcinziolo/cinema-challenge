@@ -10,7 +10,10 @@ fun updateShowTimePrototype(
     fetchShowTimes: FetchShowTimes,
     saveShowTime: SaveShowTime
 ): UpdateShowTime = { showTime ->
-    if (fetchShowTimes(showTime.date).any { it.overLap(showTime) })
+    val otherShowTimes = fetchShowTimes(showTime.date)
+        .filter { it.showTimeId != showTime.showTimeId }
+
+    if (otherShowTimes.any { it.overLap(showTime) })
         throw ShowTimeOverlap
     saveShowTime(showTime)
 }

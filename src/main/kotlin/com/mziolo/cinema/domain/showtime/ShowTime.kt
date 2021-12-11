@@ -8,6 +8,7 @@ typealias ShowTimes = List<ShowTime>
 
 data class ShowTime(
     val movie: Movie,
+    val showTimeId: ShowTimeId,
     val time: LocalTime,
     val date: ShowTimeDate,
     val price: BigDecimal
