@@ -13,15 +13,13 @@ suspend fun initializeMovieCatalogPrototype(
     fetchImdbIds: FetchImdbIds,
     fetchMovieDetails: FetchMovieDetails,
     generateMovieId: GenerateMovieId
-): InitializeMovieCatalog {
-    return {
-        fetchImdbIds().ids
-            .associate { generateMovieId(it) to fetchMovieDetails(it) }
-            .let { MovieCatalog(it) }
-    }
+): InitializeMovieCatalog = {
+    fetchImdbIds().ids
+        .associate { generateMovieId(it) to fetchMovieDetails(it) }
+        .let { MovieCatalog(it) }
 }
 
-suspend fun getMovieDetailsPrototype(initializeCatalog: InitializeMovieCatalog): GetMovieDetails {
-    val catalog = initializeCatalog()
+suspend fun getMovieDetailsPrototype(initializeMovieCatalog: InitializeMovieCatalog): GetMovieDetails {
+    val catalog = initializeMovieCatalog()
     return { movieId: MovieId -> catalog.getMovieDetails(movieId) }
 }
