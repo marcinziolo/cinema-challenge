@@ -1,5 +1,5 @@
 package com.mziolo.cinema.domain.catalog
 
-data class ImdbMovieId(
+data class ImdbId(
     val id: String
 )

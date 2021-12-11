@@ -1,8 +1,9 @@
-package com.mziolo.cinema.infrastructure.catalog
+package com.mziolo.cinema.infrastructure.catalog.adapter
 
 import com.mziolo.cinema.domain.catalog.FetchMovieDetails
-import com.mziolo.cinema.domain.catalog.ImdbMovieId
+import com.mziolo.cinema.domain.catalog.ImdbId
 import com.mziolo.cinema.domain.catalog.MovieDetails
+import com.mziolo.cinema.infrastructure.catalog.ImdbMovieDto
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.stereotype.Component
@@ -16,7 +17,7 @@ class FetchMovieDetailsAdapter(
     private val webClient: WebClient
 ): FetchMovieDetails {
 
-    override suspend fun invoke(imdbMovieId: ImdbMovieId): MovieDetails {
+    override suspend fun invoke(imdbId: ImdbId): MovieDetails {
         return webClient.get().uri("$imdbHost?apikey=$imdbKey&i=tt0232500")
             .accept(APPLICATION_JSON)
             .retrieve()

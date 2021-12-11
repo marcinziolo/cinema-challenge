@@ -4,17 +4,17 @@ import com.mziolo.cinema.domain.core.MovieId
 
 typealias GetMovieDetails = (MovieId) -> MovieDetails
 typealias InitializeMovieCatalog = suspend () -> MovieCatalog
-typealias FetchImdbMovieIds = () -> ImdbMovieIds //port
-typealias FetchMovieDetails = suspend (ImdbMovieId) -> MovieDetails //port
-typealias GenerateMovieId = (ImdbMovieId) -> MovieId //port
+typealias FetchImdbIds = () -> ImdbIds //port
+typealias FetchMovieDetails = suspend (ImdbId) -> MovieDetails //port
+typealias GenerateMovieId = (ImdbId) -> MovieId //port
 
 
 suspend fun initializeMovieCatalog(
-    fetchImdbMovieIds: FetchImdbMovieIds,
+    fetchImdbIds: FetchImdbIds,
     fetchMovieDetails: FetchMovieDetails,
     generateMovieId: GenerateMovieId
 ) {
-    fetchImdbMovieIds().ids
+    fetchImdbIds().ids
         .associate { generateMovieId(it) to fetchMovieDetails(it) }
         .let { MovieCatalog(it) }
 }
