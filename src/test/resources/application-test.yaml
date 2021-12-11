@@ -1,0 +1,8 @@
+app:
+  imdbHost: localhost:8090
+  imdbKey: testImdbKey
+  moviesIds:
+    - tt0232500
+
+
+
