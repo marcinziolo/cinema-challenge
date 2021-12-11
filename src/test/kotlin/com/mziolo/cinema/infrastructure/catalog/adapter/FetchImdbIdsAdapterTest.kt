@@ -1,6 +1,6 @@
 package com.mziolo.cinema.infrastructure.catalog.adapter
 
-import com.mziolo.cinema.AbstractTest
+import com.mziolo.cinema.SpringAbstractTest
 import com.mziolo.cinema.domain.catalog.FetchImdbIds
 import com.mziolo.cinema.domain.catalog.ImdbId
 import com.mziolo.cinema.domain.catalog.ImdbIds
@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
-internal class FetchImdbIdsAdapterTest: AbstractTest() {
+internal class FetchImdbIdsAdapterTest: SpringAbstractTest() {
 
     @Autowired
     private lateinit var fetchImdbIds: FetchImdbIds

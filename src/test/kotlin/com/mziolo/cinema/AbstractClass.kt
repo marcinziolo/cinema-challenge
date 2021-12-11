@@ -14,7 +14,7 @@ import java.net.ServerSocket
 @Suppress("UnnecessaryAbstractClass")
 @ActiveProfiles("test")
 @SpringBootTest
-abstract class AbstractTest {
+abstract class SpringAbstractTest {
     protected val wiremockPort = 8090
     val wiremock: WireMockServer = WireMockServer(options().port(wiremockPort).notifier(ConsoleNotifier(true)))
     val url

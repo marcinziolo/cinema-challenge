@@ -4,7 +4,7 @@ import com.marcinziolo.kotlin.wiremock.contains
 import com.marcinziolo.kotlin.wiremock.equalTo
 import com.marcinziolo.kotlin.wiremock.get
 import com.marcinziolo.kotlin.wiremock.returnsJson
-import com.mziolo.cinema.AbstractTest
+import com.mziolo.cinema.SpringAbstractTest
 import com.mziolo.cinema.domain.catalog.FetchMovieDetails
 import com.mziolo.cinema.domain.catalog.ImdbId
 import com.mziolo.cinema.domain.catalog.MovieDetails
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
-class FetchMovieDetailsAdapterTest: AbstractTest() {
+class FetchMovieDetailsAdapterTest: SpringAbstractTest() {
 
 	@Autowired
 	private lateinit var fetchMovieDetails: FetchMovieDetails
