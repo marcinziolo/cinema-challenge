@@ -6,10 +6,7 @@ import com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock
-import org.springframework.context.annotation.Profile
 import org.springframework.test.context.ActiveProfiles
-import java.net.ServerSocket
 
 @Suppress("UnnecessaryAbstractClass")
 @ActiveProfiles("test")

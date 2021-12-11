@@ -9,15 +9,19 @@ typealias FetchMovieDetails = suspend (ImdbId) -> MovieDetails //port
 typealias GenerateMovieId = (ImdbId) -> MovieId //port
 
 
-suspend fun initializeMovieCatalog(
+suspend fun initializeMovieCatalogPrototype(
     fetchImdbIds: FetchImdbIds,
     fetchMovieDetails: FetchMovieDetails,
     generateMovieId: GenerateMovieId
-) {
-    fetchImdbIds().ids
-        .associate { generateMovieId(it) to fetchMovieDetails(it) }
-        .let { MovieCatalog(it) }
+): InitializeMovieCatalog {
+    return {
+        fetchImdbIds().ids
+            .associate { generateMovieId(it) to fetchMovieDetails(it) }
+            .let { MovieCatalog(it) }
+    }
 }
 
-suspend fun getMovieDetails(initializeCatalog: InitializeMovieCatalog): GetMovieDetails =
-    initializeCatalog()::getMovieDetails
+suspend fun getMovieDetailsPrototype(initializeCatalog: InitializeMovieCatalog): GetMovieDetails {
+    val catalog = initializeCatalog()
+    return { movieId: MovieId -> catalog.getMovieDetails(movieId) }
+}
