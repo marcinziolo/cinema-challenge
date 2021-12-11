@@ -28,7 +28,7 @@ class FetchMovieDetailsAdapterTest: SpringAbstractTest() {
 			releaseYear = 2001,
 			description = plot,
 			imdbRating = 6.8,
-			runtime = runtime
+			runtimeInMinutes = 106
 		)
 
 		wiremock.get {

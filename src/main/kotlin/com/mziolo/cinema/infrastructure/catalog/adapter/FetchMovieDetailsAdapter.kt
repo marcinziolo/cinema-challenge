@@ -10,6 +10,10 @@ import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.awaitBody
 
+private const val imdbSource = "Internet Movie Database"
+private const val minSuffix = " min"
+private val valueRegex = """([0-9]{1,2}.[0-9]{1,2})/10""".toRegex()
+
 @Component
 class FetchMovieDetailsAdapter(
     @Value("\${app.imdbHost}") private val imdbHost: String,
@@ -26,18 +30,13 @@ class FetchMovieDetailsAdapter(
     }
 }
 
-private fun ImdbMovieDto.toMovieDetails(): MovieDetails {
-    val imdbSource = "Internet Movie Database"
-    val valueRegex = """([0-9]{1,2}.[0-9]{1,2})/10""".toRegex()
-
-    return MovieDetails(
-        name = title,
-        description = plot,
-        releaseYear = year.toInt(),
-        imdbRating = ratings
-            .find { it.source == imdbSource }
-            .let { valueRegex.find(it!!.value) }
-            .let { it!!.groupValues[1].toDouble()},
-        runtime = runtime
-    )
-}
+private fun ImdbMovieDto.toMovieDetails(): MovieDetails = MovieDetails(
+    name = title,
+    description = plot,
+    releaseYear = year.toInt(),
+    imdbRating = ratings
+        .find { it.source == imdbSource }
+        .let { valueRegex.find(it!!.value) }
+        .let { it!!.groupValues[1].toDouble()},
+    runtimeInMinutes = runtime.removeSuffix(minSuffix).toInt()
+)
