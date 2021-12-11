@@ -1,9 +1,15 @@
 package com.mziolo.cinema.domain.catalog
 
-import com.mziolo.cinema.domain.core.MovieId
+import java.util.UUID
 
 data class MovieCatalog(
-    val catalog: Map<MovieId, MovieDetails>
-)
+    val catalog: Map<MovieId, Movie>
+) {
 
-fun MovieCatalog.getMovieDetails(movieId: MovieId): MovieDetails = catalog[movieId]!!
+    fun createMovieId(maybeMovieId: UUID): MovieId {
+        val movieId = MovieId(maybeMovieId)
+        return if(catalog.containsKey(movieId)) movieId else throw InvalidMovieId
+    }
+
+    fun getMovie(movieId: MovieId) = catalog[movieId]!!
+}

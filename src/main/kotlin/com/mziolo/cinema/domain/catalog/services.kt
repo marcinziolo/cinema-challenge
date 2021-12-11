@@ -1,25 +1,21 @@
 package com.mziolo.cinema.domain.catalog
 
-import com.mziolo.cinema.domain.core.MovieId
-
-typealias GetMovieDetails = (MovieId) -> MovieDetails
 typealias InitializeMovieCatalog = suspend () -> MovieCatalog
+
 typealias FetchImdbIds = () -> ImdbIds //port
-typealias FetchMovieDetails = suspend (ImdbId) -> MovieDetails //port
+typealias FetchMovie = suspend (ImdbId, MovieId) -> Movie //port
 typealias GenerateMovieId = (ImdbId) -> MovieId //port
 
 
 suspend fun initializeMovieCatalogPrototype(
     fetchImdbIds: FetchImdbIds,
-    fetchMovieDetails: FetchMovieDetails,
+    fetchMovie: FetchMovie,
     generateMovieId: GenerateMovieId
 ): InitializeMovieCatalog = {
     fetchImdbIds().ids
-        .associate { generateMovieId(it) to fetchMovieDetails(it) }
+        .associate {
+            val movieId = generateMovieId(it)
+            movieId to fetchMovie(it, movieId)
+        }
         .let { MovieCatalog(it) }
-}
-
-suspend fun getMovieDetailsPrototype(initializeMovieCatalog: InitializeMovieCatalog): GetMovieDetails {
-    val catalog = initializeMovieCatalog()
-    return { movieId: MovieId -> catalog.getMovieDetails(movieId) }
 }

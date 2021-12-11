@@ -1,6 +1,6 @@
 package com.mziolo.cinema.domain.rating
 
-import com.mziolo.cinema.domain.core.MovieId
+import com.mziolo.cinema.domain.catalog.MovieId
 
 data class MovieVote(
     val movieId: MovieId,

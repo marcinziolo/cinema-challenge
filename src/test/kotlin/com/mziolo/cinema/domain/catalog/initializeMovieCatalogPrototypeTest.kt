@@ -11,16 +11,16 @@ internal class InitializeMovieCatalogTest {
     @Test
     internal fun shouldInitializeMovieCatalog() = runBlocking {
         val fetchImdIds = mockk<FetchImdbIds>()
-        val fetchMovieDetails = mockk<FetchMovieDetails>()
+        val fetchMovie = mockk<FetchMovie>()
         val generateMovieId = mockk<GenerateMovieId>()
 
         every { fetchImdIds() } returns dummyImdbIds
-        coEvery { fetchMovieDetails(dummyImdbId) } returns dummyMovieDetails
+        coEvery { fetchMovie(dummyImdbId, dummyMovieId) } returns dummyMovie
         every { generateMovieId(dummyImdbId) } returns dummyMovieId
 
         val initializeMovieCatalog = initializeMovieCatalogPrototype(
             fetchImdIds,
-            fetchMovieDetails,
+            fetchMovie,
             generateMovieId
         )
 

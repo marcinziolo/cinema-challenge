@@ -5,49 +5,52 @@ import com.marcinziolo.kotlin.wiremock.equalTo
 import com.marcinziolo.kotlin.wiremock.get
 import com.marcinziolo.kotlin.wiremock.returnsJson
 import com.mziolo.cinema.SpringAbstractTest
-import com.mziolo.cinema.domain.catalog.FetchMovieDetails
+import com.mziolo.cinema.domain.catalog.FetchMovie
 import com.mziolo.cinema.domain.catalog.ImdbId
-import com.mziolo.cinema.domain.catalog.MovieDetails
+import com.mziolo.cinema.domain.catalog.Movie
+import com.mziolo.cinema.domain.catalog.dummyMovieId
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
-class FetchMovieDetailsAdapterTest: SpringAbstractTest() {
+class FetchMovieAdapterTest : SpringAbstractTest() {
 
-	@Autowired
-	private lateinit var fetchMovieDetails: FetchMovieDetails
+    @Autowired
+    private lateinit var fetchMovie: FetchMovie
 
-	@Test
-	fun shouldFetchMovieDetails() {
+    @Test
+    fun shouldFetchMovieDetails() {
 
-		//given
-		val imdbId = ImdbId("tt0232500")
-		val expectedMovieDetails = MovieDetails(
-			name = "The Fast and the Furious",
-			releaseYear = 2001,
-			description = plot,
-			imdbRating = 6.8,
-			runtimeInMinutes = 106
-		)
+        //given
+        val imdbId = ImdbId("tt0232500")
+        val expectedMovie = Movie(
+            movieId = dummyMovieId,
+            name = "The Fast and the Furious",
+            releaseYear = 2001,
+            description = plot,
+            imdbRating = 6.8,
+            runtimeInMinutes = 106
+        )
 
-		wiremock.get {
-			url equalTo "/"
-			queryParams contains "i" equalTo imdbId.id
-		} returnsJson {
-			body = sampleResponse
-		}
+        wiremock.get {
+            url equalTo "/"
+            queryParams contains "i" equalTo imdbId.id
+        } returnsJson {
+            body = sampleResponse
+        }
 
-		runBlocking {
-			assertEquals(expectedMovieDetails,fetchMovieDetails(imdbId))
-		}
-	}
+        runBlocking {
+            assertEquals(expectedMovie, fetchMovie(imdbId, dummyMovieId))
+        }
+    }
 
-	private val runtime = "106 min"
-	private val title = "The Fast and the Furious"
-	private val plot = "Los Angeles police officer Brian O'Conner must decide where his loyalty really lies when he becomes enamored with the street racing world he has been sent undercover to destroy."
+    private val runtime = "106 min"
+    private val title = "The Fast and the Furious"
+    private val plot =
+        "Los Angeles police officer Brian O'Conner must decide where his loyalty really lies when he becomes enamored with the street racing world he has been sent undercover to destroy."
 
-	private val sampleResponse = """
+    private val sampleResponse = """
 		{
 		  "Title": "$title",
 		  "Year": "2001",

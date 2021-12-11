@@ -1,8 +1,9 @@
 package com.mziolo.cinema.infrastructure.catalog.adapter
 
-import com.mziolo.cinema.domain.catalog.FetchMovieDetails
+import com.mziolo.cinema.domain.catalog.FetchMovie
 import com.mziolo.cinema.domain.catalog.ImdbId
-import com.mziolo.cinema.domain.catalog.MovieDetails
+import com.mziolo.cinema.domain.catalog.Movie
+import com.mziolo.cinema.domain.catalog.MovieId
 import com.mziolo.cinema.infrastructure.catalog.ImdbMovieDto
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.MediaType.APPLICATION_JSON
@@ -15,22 +16,23 @@ private const val minSuffix = " min"
 private val valueRegex = """([0-9]{1,2}.[0-9]{1,2})/10""".toRegex()
 
 @Component
-class FetchMovieDetailsAdapter(
+class FetchMovieAdapter(
     @Value("\${app.imdbHost}") private val imdbHost: String,
     @Value("\${app.imdbKey}") private val imdbKey: String,
     private val webClient: WebClient
-): FetchMovieDetails {
+): FetchMovie {
 
-    override suspend fun invoke(imdbId: ImdbId): MovieDetails {
+    override suspend fun invoke(imdbId: ImdbId, movieId: MovieId): Movie {
         return webClient.get().uri("$imdbHost?apikey=$imdbKey&i=tt0232500")
             .accept(APPLICATION_JSON)
             .retrieve()
             .awaitBody<ImdbMovieDto>()
-            .toMovieDetails()
+            .toMovie(movieId)
     }
 }
 
-private fun ImdbMovieDto.toMovieDetails(): MovieDetails = MovieDetails(
+private fun ImdbMovieDto.toMovie(movieId: MovieId): Movie = Movie(
+    movieId = movieId,
     name = title,
     description = plot,
     releaseYear = year.toInt(),
@@ -38,5 +40,5 @@ private fun ImdbMovieDto.toMovieDetails(): MovieDetails = MovieDetails(
         .find { it.source == imdbSource }
         .let { valueRegex.find(it!!.value) }
         .let { it!!.groupValues[1].toDouble()},
-    runtimeInMinutes = runtime.removeSuffix(minSuffix).toInt()
+    runtimeInMinutes = runtime.removeSuffix(minSuffix).toLong()
 )
