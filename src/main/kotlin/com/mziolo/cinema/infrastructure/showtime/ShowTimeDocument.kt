@@ -10,8 +10,8 @@ import java.util.UUID
 @Document
 data class ShowTimeDocument(
     @Id val id: UUID,
-    val time: LocalTime,
-    val date: LocalDate,
+    val time: String,
+    val date: String,
     val movieId: UUID,
     val price: BigDecimal
 )

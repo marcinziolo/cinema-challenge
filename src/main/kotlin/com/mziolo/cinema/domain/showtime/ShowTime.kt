@@ -1,17 +1,18 @@
 package com.mziolo.cinema.domain.showtime
 
-import com.mziolo.cinema.domain.catalog.Movie
+import com.mziolo.cinema.domain.catalog.MovieId
 import java.math.BigDecimal
 import java.time.LocalTime
 
 typealias ShowTimes = List<ShowTime>
 
 data class ShowTime(
-    val movie: Movie,
+    val movieId: MovieId,
     val showTimeId: ShowTimeId,
     val time: LocalTime,
     val date: ShowTimeDate,
-    val price: BigDecimal
+    val price: BigDecimal,
+    val runtime: Int?
 ) {
     fun overLap(otherShowTime: ShowTime): Boolean {
         if(date != otherShowTime.date)
@@ -22,5 +23,5 @@ data class ShowTime(
         return time.isBefore(otherStopTime) && stopTime.isAfter(otherTime)
     }
 
-    private fun stopTime() = time.plusMinutes(movie.runtimeInMinutes).plusMinutes(MINIMUM_BREAK_IN_MINUTES)
+    private fun stopTime() = time.plusMinutes(runtime!!.toLong())
 }

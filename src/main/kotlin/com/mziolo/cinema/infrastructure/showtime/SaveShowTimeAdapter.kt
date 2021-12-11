@@ -16,8 +16,8 @@ class SaveShowTimeAdapter(
 
 private fun ShowTime.toDocument(): ShowTimeDocument = ShowTimeDocument(
     id = this.showTimeId.id,
-    movieId = this.movie.movieId.id,
-    date = this.date.date,
-    time = this.time,
+    movieId = this.movieId.id,
+    date = this.date.date.toString(),
+    time = this.time.toString(),
     price = this.price
 )
