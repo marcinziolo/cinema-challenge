@@ -1,14 +1,10 @@
 package com.mziolo.cinema.infrastructure
 
-import com.mziolo.cinema.domain.catalog.FetchImdbIds
-import com.mziolo.cinema.domain.catalog.FetchMovie
-import com.mziolo.cinema.domain.catalog.GenerateMovieId
 import com.mziolo.cinema.domain.catalog.InitializeMovieCatalog
 import com.mziolo.cinema.domain.catalog.MovieCatalog
 import com.mziolo.cinema.domain.catalog.initializeMovieCatalogPrototype
-import com.mziolo.cinema.domain.showtime.FetchShowTimes
-import com.mziolo.cinema.domain.showtime.SaveShowTime
 import com.mziolo.cinema.domain.showtime.UpdateShowTime
+import com.mziolo.cinema.domain.showtime.updateRuntime
 import com.mziolo.cinema.domain.showtime.updateShowTimePrototype
 import com.mziolo.cinema.infrastructure.catalog.FetchImdbIdsAdapter
 import com.mziolo.cinema.infrastructure.catalog.FetchMovieAdapter
@@ -36,6 +32,7 @@ class DomainConfiguration {
     fun updateShowTime(
         fetchShowTimes: FetchShowTimesAdapter,
         saveShowTime: SaveShowTimeAdapter,
-    ): UpdateShowTime = updateShowTimePrototype(fetchShowTimes, saveShowTime)
+        movieCatalog: MovieCatalog
+    ): UpdateShowTime = updateShowTimePrototype(fetchShowTimes.updateRuntime(movieCatalog), saveShowTime)
 
 }

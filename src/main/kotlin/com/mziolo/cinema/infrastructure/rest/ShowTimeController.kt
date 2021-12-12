@@ -29,7 +29,7 @@ class ShowTimeController(
 
     @GetMapping("/{date}")
     suspend fun getShowTimes(@PathVariable date: String) =
-        ResponseEntity.ok(showTimeFlow.fetchShowTimes(ShowTimeDate(LocalDate.parse(date))))
+        ResponseEntity.ok(showTimeFlow.fetchShowTimes(ShowTimeDate(LocalDate.parse(date))).map(ShowTime::toDto))
 }
 
 private fun UpdateShowTimeDto.toShowTime(id: UUID): ShowTime {
@@ -42,3 +42,12 @@ private fun UpdateShowTimeDto.toShowTime(id: UUID): ShowTime {
         runtime = null
     )
 }
+
+private fun ShowTime.toDto(): ShowTimeDto = ShowTimeDto(
+    showTimeId = this.showTimeId.id,
+    movieId = this.movieId.id,
+    runtime = this.runtime!!,
+    price = "${this.price} USD",
+    day = this.date.date.toString(),
+    time = this.time.toString()
+)
