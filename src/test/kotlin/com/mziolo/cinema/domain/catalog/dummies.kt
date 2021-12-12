@@ -15,4 +15,4 @@ internal val dummyMovie = Movie(
 internal val dummyCatalog = MovieCatalog(mapOf(dummyMovieId to dummyMovie))
 
 internal val dummyImdbId = ImdbId("t21213")
-internal val dummyImdbIds = ImdbIds(listOf(ImdbId("t21213")))
+internal val dummyImdbIds = ImdbIds(listOf(dummyImdbId))
