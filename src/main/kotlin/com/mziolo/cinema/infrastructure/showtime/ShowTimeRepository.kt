@@ -7,6 +7,6 @@ import java.util.UUID
 
 
 @Repository
-interface ShowTimeRepository: ReactiveCrudRepository<ShowTimeDocument, UUID> {
+interface ShowTimeRepository : ReactiveCrudRepository<ShowTimeDocument, UUID> {
     fun findAllByDate(date: String): Flux<ShowTimeDocument>
 }

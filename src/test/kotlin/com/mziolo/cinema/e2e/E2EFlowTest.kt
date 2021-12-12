@@ -1,8 +1,6 @@
 package com.mziolo.cinema.e2e
 
-import com.mziolo.cinema.SpringAbstractTest
 import com.mziolo.cinema.SpringMongoDbTest
-import com.mziolo.cinema.SpringMongoDbTest.Companion.mongoDBContainer
 import com.mziolo.cinema.domain.catalog.dummyMovieId
 import com.mziolo.cinema.domain.showtime.anotherDummyShowTimeId
 import com.mziolo.cinema.domain.showtime.dummyShowTime
@@ -15,7 +13,7 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
 
-class E2EFlowTest: SpringMongoDbTest() {
+class E2EFlowTest : SpringMongoDbTest() {
 
     @Autowired
     private lateinit var webTestClient: WebTestClient

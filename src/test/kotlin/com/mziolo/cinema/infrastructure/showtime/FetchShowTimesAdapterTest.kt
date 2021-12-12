@@ -37,7 +37,7 @@ internal class FetchShowTimesAdapterTest : SpringMongoDbTest() {
             val showTimes = fetchShowTimesAdapter(dummyDate)
 
             //then
-            assertEquals(listOf(dummyShowTime.copy(runtime=null)), showTimes)
+            assertEquals(listOf(dummyShowTime.copy(runtime = null)), showTimes)
         }
     }
 

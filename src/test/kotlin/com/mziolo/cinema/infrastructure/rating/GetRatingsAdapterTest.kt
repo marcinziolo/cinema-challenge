@@ -7,7 +7,6 @@ import com.mziolo.cinema.domain.rating.Rating
 import com.mziolo.cinema.domain.rating.Rating.NoRatingYet
 import kotlinx.coroutines.reactive.awaitFirst
 import kotlinx.coroutines.runBlocking
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -17,7 +16,7 @@ import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.mongodb.core.query.Update
 
 
-internal class GetRatingsAdapterTest: SpringMongoDbTest() {
+internal class GetRatingsAdapterTest : SpringMongoDbTest() {
 
     @Autowired
     lateinit var getRatings: GetRatings

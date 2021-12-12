@@ -15,7 +15,7 @@ data class ShowTime(
     val runtime: Int?
 ) {
     fun overLap(otherShowTime: ShowTime): Boolean {
-        if(date != otherShowTime.date)
+        if (date != otherShowTime.date)
             return false
         val stopTime = stopTime()
         val otherTime = otherShowTime.time

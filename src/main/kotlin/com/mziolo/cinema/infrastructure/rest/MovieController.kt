@@ -39,7 +39,7 @@ class MovieController(private val movieFlow: MovieFlow) {
         val movie = this.movie
         val userRating = when (this.rating) {
             is RatingValue -> this.rating.value.toString()
-            is NoRatingYet-> "n/a"
+            is NoRatingYet -> "n/a"
         }
         return MovieDto(
             id = movie.movieId.id,

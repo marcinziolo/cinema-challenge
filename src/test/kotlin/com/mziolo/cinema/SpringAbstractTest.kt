@@ -8,12 +8,9 @@ import com.marcinziolo.kotlin.wiremock.equalTo
 import com.marcinziolo.kotlin.wiremock.get
 import com.marcinziolo.kotlin.wiremock.returnsJson
 import com.mziolo.cinema.domain.catalog.ImdbId
-import com.mziolo.cinema.infrastructure.catalog.adapter.FetchMovieAdapterTest
 import com.mziolo.cinema.infrastructure.sampleResponse
 import org.junit.jupiter.api.AfterAll
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeAll
-import org.junit.jupiter.api.BeforeEach
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles

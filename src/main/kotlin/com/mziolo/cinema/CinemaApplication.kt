@@ -9,5 +9,5 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 class CinemaApplication
 
 fun main(args: Array<String>) {
-	runApplication<CinemaApplication>(*args)
+    runApplication<CinemaApplication>(*args)
 }

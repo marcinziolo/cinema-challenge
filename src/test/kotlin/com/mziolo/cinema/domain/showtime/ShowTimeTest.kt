@@ -2,7 +2,6 @@ package com.mziolo.cinema.domain.showtime
 
 import com.mongodb.assertions.Assertions.assertFalse
 import com.mongodb.assertions.Assertions.assertTrue
-import com.mziolo.cinema.domain.catalog.dummyMovie
 import org.junit.jupiter.api.Test
 import java.time.LocalTime
 

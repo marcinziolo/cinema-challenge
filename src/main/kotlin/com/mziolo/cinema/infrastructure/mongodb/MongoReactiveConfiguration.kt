@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguration
 
 
-class MongoReactiveConfiguration: AbstractReactiveMongoConfiguration() {
+class MongoReactiveConfiguration : AbstractReactiveMongoConfiguration() {
 
     @Bean
     fun mongo(): MongoClient = MongoClients.create()

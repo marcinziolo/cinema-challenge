@@ -27,7 +27,7 @@ class ShowTimeController(
 ) {
 
     @PutMapping("/{id}")
-    suspend fun updateShowTime(@PathVariable id: UUID, @RequestBody dto: UpdateShowTimeDto ) =
+    suspend fun updateShowTime(@PathVariable id: UUID, @RequestBody dto: UpdateShowTimeDto) =
         ResponseEntity.ok(showTimeFlow.updateShowTime(dto.toShowTime(id)))
 
     @GetMapping("/{date}")

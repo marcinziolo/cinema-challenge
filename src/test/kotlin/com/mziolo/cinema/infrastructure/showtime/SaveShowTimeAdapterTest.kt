@@ -2,7 +2,6 @@ package com.mziolo.cinema.infrastructure.showtime
 
 import com.mziolo.cinema.SpringMongoDbTest
 import com.mziolo.cinema.domain.catalog.dummyMovieId
-import com.mziolo.cinema.domain.showtime.SaveShowTime
 import com.mziolo.cinema.domain.showtime.dummyDate
 import com.mziolo.cinema.domain.showtime.dummyPrice
 import com.mziolo.cinema.domain.showtime.dummyShowTime
@@ -14,7 +13,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
-internal class SaveShowTimeAdapterTest: SpringMongoDbTest() {
+internal class SaveShowTimeAdapterTest : SpringMongoDbTest() {
 
     @Autowired
     lateinit var repository: ShowTimeRepository

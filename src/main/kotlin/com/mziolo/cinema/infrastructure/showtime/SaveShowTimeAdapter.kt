@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component
 @Component
 class SaveShowTimeAdapter(
     val repository: ShowTimeRepository
-): SaveShowTime {
+) : SaveShowTime {
     override suspend fun invoke(showTime: ShowTime) {
         repository.save(showTime.toDocument()).awaitFirst()
     }

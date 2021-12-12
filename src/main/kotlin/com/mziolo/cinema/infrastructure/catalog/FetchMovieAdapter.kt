@@ -19,7 +19,7 @@ class FetchMovieAdapter(
     @Value("\${app.imdbHost}") private val imdbHost: String,
     @Value("\${app.imdbKey}") private val imdbKey: String,
     private val webClient: WebClient
-): FetchMovie {
+) : FetchMovie {
 
     override suspend fun invoke(imdbId: ImdbId, movieId: MovieId): Movie {
         return webClient.get().uri("$imdbHost?apikey=$imdbKey&i=${imdbId.id}")
@@ -38,6 +38,6 @@ private fun ImdbMovieDto.toMovie(movieId: MovieId): Movie = Movie(
     imdbRating = ratings
         .find { it.source == imdbSource }
         .let { valueRegex.find(it!!.value) }
-        .let { it!!.groupValues[1].toDouble()},
+        .let { it!!.groupValues[1].toDouble() },
     runtimeInMinutes = runtime.removeSuffix(minSuffix).toInt()
 )

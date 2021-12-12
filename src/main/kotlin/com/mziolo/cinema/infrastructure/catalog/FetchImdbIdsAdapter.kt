@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component
 class FetchImdbIdsAdapter(
 //    @Value("\${app.imdbMovieIds}") val movieIds: List<String>
     val imdbMoviesProperties: ImdbMoviesProperties
-): FetchImdbIds {
+) : FetchImdbIds {
     override fun invoke(): ImdbIds = ImdbIds(imdbMoviesProperties.imdbMovieIds.map { ImdbId(it) })
 }

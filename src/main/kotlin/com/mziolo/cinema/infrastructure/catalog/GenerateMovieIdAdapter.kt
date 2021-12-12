@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component
 import java.util.UUID
 
 @Component
-class GenerateMovieIdAdapter: GenerateMovieId {
+class GenerateMovieIdAdapter : GenerateMovieId {
     override fun invoke(imdbId: ImdbId): MovieId = UUID.nameUUIDFromBytes(imdbId.id.toByteArray()).let { MovieId(it) }
 }

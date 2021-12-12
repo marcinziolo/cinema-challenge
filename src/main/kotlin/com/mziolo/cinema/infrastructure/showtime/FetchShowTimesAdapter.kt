@@ -15,7 +15,7 @@ import java.time.LocalTime
 @Component
 class FetchShowTimesAdapter(
     private val repository: ShowTimeRepository
-): FetchShowTimes {
+) : FetchShowTimes {
     override suspend fun invoke(showTimeDate: ShowTimeDate): ShowTimes = repository
         .findAllByDate(showTimeDate.date.toString())
         .asFlow()

@@ -3,8 +3,8 @@ package com.mziolo.cinema.domain.rating
 sealed class Rating {
     data class RatingValue(
         val value: Double
-    ): Rating()
+    ) : Rating()
 
-    object NoRatingYet: Rating()
+    object NoRatingYet : Rating()
 }
 

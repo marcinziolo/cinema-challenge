@@ -2,6 +2,6 @@ package com.mziolo.cinema.domain.catalog
 
 import java.util.UUID
 
-data class MovieId (
+data class MovieId(
     val id: UUID
 )
