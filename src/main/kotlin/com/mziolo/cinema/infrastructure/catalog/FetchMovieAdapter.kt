@@ -1,10 +1,9 @@
-package com.mziolo.cinema.infrastructure.catalog.adapter
+package com.mziolo.cinema.infrastructure.catalog
 
 import com.mziolo.cinema.domain.catalog.FetchMovie
 import com.mziolo.cinema.domain.catalog.ImdbId
 import com.mziolo.cinema.domain.catalog.Movie
 import com.mziolo.cinema.domain.catalog.MovieId
-import com.mziolo.cinema.infrastructure.catalog.ImdbMovieDto
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.MediaType.APPLICATION_JSON
 import org.springframework.stereotype.Component

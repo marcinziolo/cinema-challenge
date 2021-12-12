@@ -1,6 +1,7 @@
 package com.mziolo.cinema.infrastructure.catalog.adapter
 
 import com.mziolo.cinema.domain.catalog.dummyImdbId
+import com.mziolo.cinema.infrastructure.catalog.GenerateMovieIdAdapter
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 

@@ -1,9 +1,8 @@
-package com.mziolo.cinema.infrastructure.catalog.adapter
+package com.mziolo.cinema.infrastructure.catalog
 
 import com.mziolo.cinema.domain.catalog.FetchImdbIds
 import com.mziolo.cinema.domain.catalog.ImdbId
 import com.mziolo.cinema.domain.catalog.ImdbIds
-import com.mziolo.cinema.infrastructure.catalog.ImdbMoviesProperties
 import org.springframework.stereotype.Component
 
 @Component

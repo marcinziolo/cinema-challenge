@@ -1,4 +1,4 @@
-package com.mziolo.cinema.infrastructure.catalog.adapter
+package com.mziolo.cinema.infrastructure.catalog
 
 import com.mziolo.cinema.domain.catalog.GenerateMovieId
 import com.mziolo.cinema.domain.catalog.ImdbId
