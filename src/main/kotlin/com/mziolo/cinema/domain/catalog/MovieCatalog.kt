@@ -4,9 +4,7 @@ data class MovieCatalog(
     val catalog: Map<MovieId, Movie>
 ) {
 
-    fun validateMovieId(movieId: MovieId) {
-        if (!catalog.containsKey(movieId)) throw InvalidMovieId
-    }
+    fun contains(movieId: MovieId) = catalog.containsKey(movieId)
 
     fun getMovie(movieId: MovieId) = catalog[movieId]!!
 

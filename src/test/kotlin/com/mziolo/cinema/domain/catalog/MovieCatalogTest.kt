@@ -1,8 +1,9 @@
 package com.mziolo.cinema.domain.catalog
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
 
 internal class MovieCatalogTest {
 
@@ -16,14 +17,12 @@ internal class MovieCatalogTest {
     }
 
     @Test
-    internal fun shouldValidateMovieMovieId() {
-        dummyCatalog.validateMovieId(dummyMovieId)
+    internal fun shouldContainsDummyMovieId() {
+        assertTrue(dummyCatalog.contains(dummyMovieId))
     }
 
     @Test
-    internal fun shouldThrowInvaliMovieId() {
-        assertThrows<InvalidMovieId> {
-            dummyCatalog.validateMovieId(MovieId(invnvalidMovieId))
-        }
+    internal fun shouldNotContainsInvalidMovieId() {
+        assertFalse(dummyCatalog.contains(invalidMovieId))
     }
 }

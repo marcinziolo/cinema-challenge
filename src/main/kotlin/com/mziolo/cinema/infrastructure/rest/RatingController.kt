@@ -21,7 +21,7 @@ class RatingController(
 
     @PostMapping("/{id}")
     suspend fun rateMovie(@PathVariable id: UUID, @RequestBody movieVoteDto: MovieVoteDto) =
-        ratingFacade.voteMovie(MovieVote(MovieId(id), movieVoteDto.value))
+        ratingFacade.rateMovie(MovieVote(MovieId(id), movieVoteDto.value))
             .let { ResponseEntity.ok(it) }
 
     @ExceptionHandler(InvalidMovieId::class)

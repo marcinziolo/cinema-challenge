@@ -22,7 +22,7 @@ internal class MovieFacadeTest {
     @Test
     internal fun shouldGetMovie() = runBlocking {
 
-        every { movieCatalog.validateMovieId(dummyMovieId) } returns Unit
+        every { movieCatalog.contains(dummyMovieId) } returns true
         every { movieCatalog.getMovie(dummyMovieId) } returns dummyMovie
         coEvery { getRatings(dummyMovieId) } returns dummyRating
 
@@ -34,7 +34,7 @@ internal class MovieFacadeTest {
     @Test
     internal fun shouldGetMovieWithoutRating() = runBlocking {
 
-        every { movieCatalog.validateMovieId(dummyMovieId) } returns Unit
+        every { movieCatalog.contains(dummyMovieId) } returns true
         every { movieCatalog.getMovie(dummyMovieId) } returns dummyMovie
         coEvery { getRatings(dummyMovieId) } returns NoRatingYet
 
@@ -46,7 +46,7 @@ internal class MovieFacadeTest {
     @Test
     internal fun shouldThrowInvalidMovieId() {
         runBlocking {
-            every { movieCatalog.validateMovieId(dummyMovieId) } throws InvalidMovieId
+            every { movieCatalog.contains(dummyMovieId) } returns false
             val movieFacade = MovieFacade(movieCatalog, getRatings)
 
             assertThrows<InvalidMovieId> {

@@ -3,7 +3,7 @@ package com.mziolo.cinema.domain.catalog
 import java.util.UUID
 
 internal val dummyMovieId = MovieId(UUID.fromString("72750bcb-aba7-352e-9a0f-3383659d2171"))
-internal val invnvalidMovieId = UUID.fromString("aaaaaaaa-d73a-44a7-94ab-305d4d78e353")
+internal val invalidMovieId = MovieId(UUID.fromString("aaaaaaaa-d73a-44a7-94ab-305d4d78e353"))
 internal val dummyMovie = Movie(
     movieId = dummyMovieId,
     name = "Fast&Furious",
