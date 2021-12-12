@@ -12,13 +12,10 @@ import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
-import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.web.reactive.function.BodyInserters
 
-
-@ContextConfiguration(initializers = [SpringMongoDbTest.Companion.MongoDbInitializer::class])
-class E2EFlowTest: SpringAbstractTest() {
+class E2EFlowTest: SpringMongoDbTest() {
 
     @Autowired
     private lateinit var webTestClient: WebTestClient

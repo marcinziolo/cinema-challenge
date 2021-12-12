@@ -20,7 +20,7 @@ internal class SaveShowTimeAdapterTest: SpringMongoDbTest() {
     lateinit var repository: ShowTimeRepository
 
     @Autowired
-    lateinit var saveShowTime: SaveShowTime
+    lateinit var saveShowTime: SaveShowTimeAdapter
 
     @Test
     internal fun shouldSaveShowTime() {

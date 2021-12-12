@@ -17,7 +17,7 @@ internal class MovieCatalogTest {
 
     @Test
     internal fun shouldValidateMovieMovieId() {
-        assertEquals(dummyMovieId, dummyCatalog.validateMovieId(dummyMovieId))
+        dummyCatalog.validateMovieId(dummyMovieId)
     }
 
     @Test

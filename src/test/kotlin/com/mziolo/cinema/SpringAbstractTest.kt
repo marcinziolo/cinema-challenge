@@ -18,7 +18,6 @@ import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWeb
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 
-@Suppress("UnnecessaryAbstractClass")
 @ActiveProfiles("test")
 @AutoConfigureWebTestClient
 @SpringBootTest

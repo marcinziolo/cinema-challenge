@@ -9,7 +9,6 @@ import kotlinx.coroutines.reactive.awaitFirst
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.mongodb.core.ReactiveMongoOperations
@@ -25,13 +24,6 @@ internal class GetRatingsAdapterTest: SpringMongoDbTest() {
 
     @Autowired
     lateinit var mongoOperations: ReactiveMongoOperations
-
-    @AfterEach
-    internal fun setUp() {
-        runBlocking {
-            mongoOperations.remove(Query(Criteria.where("movieId").`is`(dummyMovieId.id)), RateDocument::class.java).awaitFirst()
-        }
-    }
 
     @Test
     internal fun shouldReturnNoRating() {
