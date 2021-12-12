@@ -1,8 +1,5 @@
 app:
-  imdbUrl: http://www.omdbapi.com/
-  imdbKey: <PUT IMDB KEY>
-  movies:
-    - title: "The Fast and the Furious"
-      imdbId: "tt0232500"
-    - title:  "2 Fast 2 Furious"
-      imdbId: "tt0322259"
+  imdbHost: http://www.omdbapi.com/
+  imdbKey: 
+  imdbMovieIds:
+    - tt0232500

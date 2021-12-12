@@ -16,14 +16,14 @@ internal class MovieCatalogTest {
     }
 
     @Test
-    internal fun shouldCreateMovieId() {
-        assertEquals(dummyMovieId, dummyCatalog.createMovieId(dummyMovieId.id))
+    internal fun shouldValidateMovieMovieId() {
+        assertEquals(dummyMovieId, dummyCatalog.validateMovieId(dummyMovieId))
     }
 
     @Test
     internal fun shouldThrowInvaliMovieId() {
         assertThrows<InvalidMovieId> {
-            dummyCatalog.createMovieId(invnvalidMovieId)
+            dummyCatalog.validateMovieId(MovieId(invnvalidMovieId))
         }
     }
 }
