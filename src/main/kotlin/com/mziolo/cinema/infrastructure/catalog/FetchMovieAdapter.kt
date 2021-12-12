@@ -22,7 +22,7 @@ class FetchMovieAdapter(
 ): FetchMovie {
 
     override suspend fun invoke(imdbId: ImdbId, movieId: MovieId): Movie {
-        return webClient.get().uri("$imdbHost?apikey=$imdbKey&i=tt0232500")
+        return webClient.get().uri("$imdbHost?apikey=$imdbKey&i=${imdbId.id}")
             .accept(APPLICATION_JSON)
             .retrieve()
             .awaitBody<ImdbMovieDto>()
