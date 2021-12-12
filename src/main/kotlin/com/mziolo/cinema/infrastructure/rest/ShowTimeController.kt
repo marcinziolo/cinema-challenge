@@ -1,11 +1,14 @@
 package com.mziolo.cinema.infrastructure.rest
 
 import com.mziolo.cinema.domain.ShowTimeFlow
+import com.mziolo.cinema.domain.catalog.InvalidMovieId
 import com.mziolo.cinema.domain.catalog.MovieId
 import com.mziolo.cinema.domain.showtime.ShowTime
 import com.mziolo.cinema.domain.showtime.ShowTimeDate
 import com.mziolo.cinema.domain.showtime.ShowTimeId
+import com.mziolo.cinema.domain.showtime.ShowTimeOverlapped
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PutMapping
@@ -30,6 +33,13 @@ class ShowTimeController(
     @GetMapping("/{date}")
     suspend fun getShowTimes(@PathVariable date: String) =
         ResponseEntity.ok(showTimeFlow.fetchShowTimes(ShowTimeDate(LocalDate.parse(date))).map(ShowTime::toDto))
+
+
+    @ExceptionHandler(ShowTimeOverlapped::class)
+    fun handleShowTimeOverlapped(): ResponseEntity<Unit> = ResponseEntity.status(409).build()
+
+    @ExceptionHandler(InvalidMovieId::class)
+    fun handleInvalidMovieId(): ResponseEntity<Unit> = ResponseEntity.status(404).build()
 }
 
 private fun UpdateShowTimeDto.toShowTime(id: UUID): ShowTime {

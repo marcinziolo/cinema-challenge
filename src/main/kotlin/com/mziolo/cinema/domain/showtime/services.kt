@@ -18,7 +18,7 @@ fun updateShowTimePrototype(
         .filter { it.showTimeId != showTime.showTimeId }
 
     if (otherShowTimes.any { it.overLap(showTime) })
-        throw ShowTimeOverlap
+        throw ShowTimeOverlapped
     saveShowTime(showTime)
 }
 

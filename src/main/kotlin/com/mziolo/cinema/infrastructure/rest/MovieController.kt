@@ -2,10 +2,12 @@ package com.mziolo.cinema.infrastructure.rest
 
 import com.mziolo.cinema.domain.MovieFlow
 import com.mziolo.cinema.domain.MovieWithRating
+import com.mziolo.cinema.domain.catalog.InvalidMovieId
 import com.mziolo.cinema.domain.catalog.MovieId
 import com.mziolo.cinema.domain.rating.Rating.NoRatingYet
 import com.mziolo.cinema.domain.rating.Rating.RatingValue
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -29,6 +31,9 @@ class MovieController(private val movieFlow: MovieFlow) {
             it.toDto()
         })
     }
+
+    @ExceptionHandler(InvalidMovieId::class)
+    fun handleInvalidMovieId(): ResponseEntity<Unit> = ResponseEntity.status(404).build()
 
     private fun MovieWithRating.toDto(): MovieDto {
         val movie = this.movie
