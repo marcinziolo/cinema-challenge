@@ -2,9 +2,8 @@ package com.mziolo.cinema.infrastructure.showtime
 
 import com.mziolo.cinema.SpringMongoDbTest
 import com.mziolo.cinema.domain.catalog.dummyMovieId
-import com.mziolo.cinema.domain.showtime.ShowTimeDate
 import com.mziolo.cinema.domain.showtime.ShowTimeId
-import com.mziolo.cinema.domain.showtime.anotherShowTimeId
+import com.mziolo.cinema.domain.showtime.anotherDummyShowTimeId
 import com.mziolo.cinema.domain.showtime.dummyDate
 import com.mziolo.cinema.domain.showtime.dummyPrice
 import com.mziolo.cinema.domain.showtime.dummyShowTime
@@ -32,7 +31,7 @@ internal class FetchShowTimesAdapterTest : SpringMongoDbTest() {
             //save one in one date
             repository.save(showTimeDocument(dummyShowTimeId, dummyDate.date)).awaitFirst()
             //save another with one day after
-            repository.save(showTimeDocument(anotherShowTimeId, dummyDate.date.plusDays(1))).awaitFirst()
+            repository.save(showTimeDocument(anotherDummyShowTimeId, dummyDate.date.plusDays(1))).awaitFirst()
 
             //when
             val showTimes = fetchShowTimesAdapter(dummyDate)

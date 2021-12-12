@@ -1,5 +1,5 @@
 app:
-  imdbHost: localhost:8090
+  imdbHost: http://localhost:8090/
   imdbKey: testImdbKey
   imdbMovieIds:
     - tt0232500

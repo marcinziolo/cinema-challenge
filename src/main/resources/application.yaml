@@ -1,5 +1,5 @@
 app:
   imdbHost: http://www.omdbapi.com/
-  imdbKey:
+  imdbKey: <PUT YOUR KEY HERE>
   imdbMovieIds:
     - tt0232500
