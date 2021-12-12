@@ -1,5 +1,10 @@
 package com.mziolo.cinema.domain.rating
 
-data class RatingValue(
-    val value: Double
-)
+sealed class Rating {
+    data class RatingValue(
+        val value: Double
+    ): Rating()
+
+    object NoRatingYet: Rating()
+}
+
