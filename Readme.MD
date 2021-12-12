@@ -1,6 +1,6 @@
 ###
 
-Backend coding challenge: https://gist.github.com/wbaumann/aaa5ef095e213ffbea35b7ca3cc251a7
+Backend coding challenge
 
 ### Local run
 
