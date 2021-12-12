@@ -1,7 +1,6 @@
 package com.mziolo.cinema.domain
 
 import com.mziolo.cinema.domain.catalog.MovieCatalog
-import com.mziolo.cinema.domain.catalog.validate
 import com.mziolo.cinema.domain.showtime.FetchShowTimes
 import com.mziolo.cinema.domain.showtime.ShowTime
 import com.mziolo.cinema.domain.showtime.ShowTimeDate
@@ -13,7 +12,7 @@ class ShowTimeFacade(
     private val movieCatalog: MovieCatalog
 ) {
     suspend fun updateShowTime(showTime: ShowTime) {
-        showTime.movieId.validate(movieCatalog) {
+        movieCatalog contains showTime.movieId then {
             val showTimeWithRuntime = showTime.copy(runtime = movieCatalog.getMovie(showTime.movieId).runtimeInMinutes)
             _updateShowTime(showTimeWithRuntime)
         }

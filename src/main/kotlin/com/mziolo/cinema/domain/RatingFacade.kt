@@ -1,7 +1,6 @@
 package com.mziolo.cinema.domain
 
 import com.mziolo.cinema.domain.catalog.MovieCatalog
-import com.mziolo.cinema.domain.catalog.validate
 import com.mziolo.cinema.domain.rating.MovieVote
 import com.mziolo.cinema.domain.rating.RateMovie
 
@@ -10,7 +9,7 @@ class RatingFacade(
     private val movieCatalog: MovieCatalog
 ) {
     suspend fun rateMovie(movieVote: MovieVote) {
-        movieVote.movieId.validate(movieCatalog) {
+        movieCatalog contains movieVote.movieId then {
             _rateMovie(movieVote)
         }
     }

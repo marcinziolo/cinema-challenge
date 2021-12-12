@@ -2,6 +2,7 @@ package com.mziolo.cinema.domain
 
 import com.mziolo.cinema.domain.catalog.InvalidMovieId
 import com.mziolo.cinema.domain.catalog.MovieCatalog
+import com.mziolo.cinema.domain.catalog.MovieCatalog.ContainsStep
 import com.mziolo.cinema.domain.catalog.dummyMovie
 import com.mziolo.cinema.domain.catalog.dummyMovieId
 import com.mziolo.cinema.domain.rating.GetRatings
@@ -22,7 +23,7 @@ internal class MovieFacadeTest {
     @Test
     internal fun shouldGetMovie() = runBlocking {
 
-        every { movieCatalog.contains(dummyMovieId) } returns true
+        every { movieCatalog.contains(dummyMovieId) } returns ContainsStep
         every { movieCatalog.getMovie(dummyMovieId) } returns dummyMovie
         coEvery { getRatings(dummyMovieId) } returns dummyRating
 
@@ -34,7 +35,7 @@ internal class MovieFacadeTest {
     @Test
     internal fun shouldGetMovieWithoutRating() = runBlocking {
 
-        every { movieCatalog.contains(dummyMovieId) } returns true
+        every { movieCatalog.contains(dummyMovieId) } returns ContainsStep
         every { movieCatalog.getMovie(dummyMovieId) } returns dummyMovie
         coEvery { getRatings(dummyMovieId) } returns NoRatingYet
 
@@ -46,7 +47,7 @@ internal class MovieFacadeTest {
     @Test
     internal fun shouldThrowInvalidMovieId() {
         runBlocking {
-            every { movieCatalog.contains(dummyMovieId) } returns false
+            every { movieCatalog.contains(dummyMovieId) } throws InvalidMovieId
             val movieFacade = MovieFacade(movieCatalog, getRatings)
 
             assertThrows<InvalidMovieId> {

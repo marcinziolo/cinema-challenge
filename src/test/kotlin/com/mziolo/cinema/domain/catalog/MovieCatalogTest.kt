@@ -1,9 +1,11 @@
 package com.mziolo.cinema.domain.catalog
 
+import io.mockk.coEvery
+import io.mockk.mockk
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 
 internal class MovieCatalogTest {
 
@@ -18,11 +20,17 @@ internal class MovieCatalogTest {
 
     @Test
     internal fun shouldContainsDummyMovieId() {
-        assertTrue(dummyCatalog.contains(dummyMovieId))
+        runBlocking {
+            val delegate = mockk<suspend () -> String>()
+            coEvery { delegate() } returns "dummyString"
+            assertEquals("dummyString", dummyCatalog contains dummyMovieId then delegate)
+        }
     }
 
     @Test
     internal fun shouldNotContainsInvalidMovieId() {
-        assertFalse(dummyCatalog.contains(invalidMovieId))
+        assertThrows<InvalidMovieId> {
+            dummyCatalog contains invalidMovieId
+        }
     }
 }
