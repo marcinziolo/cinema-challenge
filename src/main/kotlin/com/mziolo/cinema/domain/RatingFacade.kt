@@ -4,7 +4,7 @@ import com.mziolo.cinema.domain.catalog.MovieCatalog
 import com.mziolo.cinema.domain.rating.MovieVote
 import com.mziolo.cinema.domain.rating.RateMovie
 
-class RatingFlow(
+class RatingFacade(
     private val rateMovie: RateMovie,
     private val movieCatalog: MovieCatalog
 ) {

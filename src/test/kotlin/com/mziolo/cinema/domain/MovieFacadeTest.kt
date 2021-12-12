@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-internal class MovieFlowTest {
+internal class MovieFacadeTest {
     private val movieCatalog = mockk<MovieCatalog>()
     private val getRatings = mockk<GetRatings>()
 
@@ -26,9 +26,9 @@ internal class MovieFlowTest {
         every { movieCatalog.getMovie(dummyMovieId) } returns dummyMovie
         coEvery { getRatings(dummyMovieId) } returns dummyRating
 
-        val movieFlow = MovieFlow(movieCatalog, getRatings)
+        val movieFacade = MovieFacade(movieCatalog, getRatings)
 
-        assertEquals(MovieWithRating(dummyMovie, dummyRating), movieFlow.getMovie(dummyMovieId))
+        assertEquals(MovieWithRating(dummyMovie, dummyRating), movieFacade.getMovie(dummyMovieId))
     }
 
     @Test
@@ -38,19 +38,19 @@ internal class MovieFlowTest {
         every { movieCatalog.getMovie(dummyMovieId) } returns dummyMovie
         coEvery { getRatings(dummyMovieId) } returns NoRatingYet
 
-        val movieFlow = MovieFlow(movieCatalog, getRatings)
+        val movieFacade = MovieFacade(movieCatalog, getRatings)
 
-        assertEquals(MovieWithRating(dummyMovie, NoRatingYet), movieFlow.getMovie(dummyMovieId))
+        assertEquals(MovieWithRating(dummyMovie, NoRatingYet), movieFacade.getMovie(dummyMovieId))
     }
 
     @Test
     internal fun shouldThrowInvalidMovieId() {
         runBlocking {
             every { movieCatalog.validateMovieId(dummyMovieId) } throws InvalidMovieId
-            val movieFlow = MovieFlow(movieCatalog, getRatings)
+            val movieFacade = MovieFacade(movieCatalog, getRatings)
 
             assertThrows<InvalidMovieId> {
-                movieFlow.getMovie(dummyMovieId)
+                movieFacade.getMovie(dummyMovieId)
             }
         }
     }

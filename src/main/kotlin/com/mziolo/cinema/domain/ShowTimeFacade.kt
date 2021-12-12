@@ -7,7 +7,7 @@ import com.mziolo.cinema.domain.showtime.ShowTimeDate
 import com.mziolo.cinema.domain.showtime.ShowTimes
 import com.mziolo.cinema.domain.showtime.UpdateShowTime
 
-class ShowTimeFlow(
+class ShowTimeFacade(
     private val _updateShowTime: UpdateShowTime,
     private val _fetchShowTimes: FetchShowTimes,
     private val movieCatalog: MovieCatalog

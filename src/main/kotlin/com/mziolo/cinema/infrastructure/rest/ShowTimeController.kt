@@ -1,6 +1,6 @@
 package com.mziolo.cinema.infrastructure.rest
 
-import com.mziolo.cinema.domain.ShowTimeFlow
+import com.mziolo.cinema.domain.ShowTimeFacade
 import com.mziolo.cinema.domain.catalog.InvalidMovieId
 import com.mziolo.cinema.domain.catalog.MovieId
 import com.mziolo.cinema.domain.showtime.ShowTime
@@ -23,16 +23,19 @@ import java.util.UUID
 @RestController
 @RequestMapping("/showtime")
 class ShowTimeController(
-    private val showTimeFlow: ShowTimeFlow
+    private val showTimeFacade: ShowTimeFacade
 ) {
 
     @PutMapping("/{id}")
     suspend fun updateShowTime(@PathVariable id: UUID, @RequestBody dto: UpdateShowTimeDto) =
-        ResponseEntity.ok(showTimeFlow.updateShowTime(dto.toShowTime(id)))
+        showTimeFacade.updateShowTime(dto.toShowTime(id))
+            .let { ResponseEntity.ok(it) }
 
     @GetMapping("/{date}")
     suspend fun getShowTimes(@PathVariable date: String) =
-        ResponseEntity.ok(showTimeFlow.fetchShowTimes(ShowTimeDate(LocalDate.parse(date))).map(ShowTime::toDto))
+        showTimeFacade.fetchShowTimes(ShowTimeDate(LocalDate.parse(date)))
+            .map(ShowTime::toDto)
+            .let { ResponseEntity.ok(it) }
 
 
     @ExceptionHandler(ShowTimeOverlapped::class)

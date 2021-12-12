@@ -1,6 +1,6 @@
 package com.mziolo.cinema.infrastructure.rest
 
-import com.mziolo.cinema.domain.RatingFlow
+import com.mziolo.cinema.domain.RatingFacade
 import com.mziolo.cinema.domain.catalog.InvalidMovieId
 import com.mziolo.cinema.domain.catalog.MovieId
 import com.mziolo.cinema.domain.rating.MovieVote
@@ -16,12 +16,13 @@ import java.util.UUID
 @RestController
 @RequestMapping("/rating")
 class RatingController(
-    private val ratingFlow: RatingFlow
+    private val ratingFacade: RatingFacade
 ) {
 
     @PostMapping("/{id}")
-    suspend fun rateMovie(@PathVariable id: UUID, @RequestBody movieVoteDto: MovieVoteDto): ResponseEntity<Unit> =
-        ResponseEntity.ok(ratingFlow.voteMovie(MovieVote(MovieId(id), movieVoteDto.value)))
+    suspend fun rateMovie(@PathVariable id: UUID, @RequestBody movieVoteDto: MovieVoteDto) =
+        ratingFacade.voteMovie(MovieVote(MovieId(id), movieVoteDto.value))
+            .let { ResponseEntity.ok(it) }
 
     @ExceptionHandler(InvalidMovieId::class)
     fun handleInvalidMovieId(): ResponseEntity<Unit> = ResponseEntity.status(404).build()

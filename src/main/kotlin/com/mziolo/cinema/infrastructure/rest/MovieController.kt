@@ -1,6 +1,6 @@
 package com.mziolo.cinema.infrastructure.rest
 
-import com.mziolo.cinema.domain.MovieFlow
+import com.mziolo.cinema.domain.MovieFacade
 import com.mziolo.cinema.domain.MovieWithRating
 import com.mziolo.cinema.domain.catalog.InvalidMovieId
 import com.mziolo.cinema.domain.catalog.MovieId
@@ -16,21 +16,19 @@ import java.util.UUID
 
 @RestController
 @RequestMapping("/movie")
-class MovieController(private val movieFlow: MovieFlow) {
+class MovieController(private val movieFacade: MovieFacade) {
 
     @GetMapping("/")
-    suspend fun getMovies(): ResponseEntity<Collection<MovieDto>> {
-        return ResponseEntity.ok(movieFlow.getAllMovies().map {
-            it.toDto()
-        })
-    }
+    suspend fun getMovies(): ResponseEntity<Collection<MovieDto>> =
+        movieFacade.getAllMovies()
+            .map { it.toDto() }
+            .let { ResponseEntity.ok(it) }
 
     @GetMapping("/{id}")
-    suspend fun getMovie(@PathVariable id: UUID): ResponseEntity<MovieDto> {
-        return ResponseEntity.ok(movieFlow.getMovie(MovieId(id)).let {
-            it.toDto()
-        })
-    }
+    suspend fun getMovie(@PathVariable id: UUID): ResponseEntity<MovieDto> =
+        movieFacade.getMovie(MovieId(id))
+            .let { it.toDto() }
+            .let { ResponseEntity.ok(it) }
 
     @ExceptionHandler(InvalidMovieId::class)
     fun handleInvalidMovieId(): ResponseEntity<Unit> = ResponseEntity.status(404).build()

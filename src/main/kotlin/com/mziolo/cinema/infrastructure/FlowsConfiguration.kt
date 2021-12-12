@@ -1,8 +1,8 @@
 package com.mziolo.cinema.infrastructure
 
-import com.mziolo.cinema.domain.MovieFlow
-import com.mziolo.cinema.domain.RatingFlow
-import com.mziolo.cinema.domain.ShowTimeFlow
+import com.mziolo.cinema.domain.MovieFacade
+import com.mziolo.cinema.domain.RatingFacade
+import com.mziolo.cinema.domain.ShowTimeFacade
 import com.mziolo.cinema.domain.catalog.MovieCatalog
 import com.mziolo.cinema.domain.showtime.UpdateShowTime
 import com.mziolo.cinema.domain.showtime.updateRuntime
@@ -19,18 +19,18 @@ class FlowsConfiguration {
     fun movieFlow(
         getRatings: GetRatingsAdapter,
         movieCatalog: MovieCatalog
-    ) = MovieFlow(movieCatalog, getRatings)
+    ) = MovieFacade(movieCatalog, getRatings)
 
     @Bean
     fun ratingFlow(
         rateMovie: RateMovieAdapter,
         movieCatalog: MovieCatalog
-    ) = RatingFlow(rateMovie, movieCatalog)
+    ) = RatingFacade(rateMovie, movieCatalog)
 
     @Bean
     fun showTimeFlow(
         updateShowTime: UpdateShowTime,
         fetchShowTimes: FetchShowTimesAdapter,
         movieCatalog: MovieCatalog
-    ) = ShowTimeFlow(updateShowTime, fetchShowTimes.updateRuntime(movieCatalog), movieCatalog)
+    ) = ShowTimeFacade(updateShowTime, fetchShowTimes.updateRuntime(movieCatalog), movieCatalog)
 }

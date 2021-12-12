@@ -11,7 +11,7 @@ data class MovieWithRating(
     val rating: Rating
 )
 
-class MovieFlow(
+class MovieFacade(
     private val movieCatalog: MovieCatalog,
     private val getRatings: GetRatings
 ) {
