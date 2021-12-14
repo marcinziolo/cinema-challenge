@@ -6,5 +6,5 @@ data class Movie(
     val description: String,
     val releaseYear: Int,
     val imdbRating: Double,
-    val runtimeInMinutes: Int
+    val runtime: Int
 )

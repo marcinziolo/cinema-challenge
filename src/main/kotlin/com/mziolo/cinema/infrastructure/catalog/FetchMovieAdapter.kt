@@ -39,5 +39,5 @@ private fun ImdbMovieDto.toMovie(movieId: MovieId): Movie = Movie(
         .find { it.source == imdbSource }
         .let { valueRegex.find(it!!.value) }
         .let { it!!.groupValues[1].toDouble() },
-    runtimeInMinutes = runtime.removeSuffix(minSuffix).toInt()
+    runtime = runtime.removeSuffix(minSuffix).toInt()
 )

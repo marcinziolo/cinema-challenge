@@ -33,7 +33,8 @@ internal class SaveShowTimeAdapterTest : SpringMongoDbTest() {
                     movieId = dummyMovieId.id,
                     date = dummyDate.date.toString(),
                     time = dummyTime.toString(),
-                    price = dummyPrice
+                    price = dummyPrice,
+                    runtime = dummyShowTime.runtime
                 ),
                 repository.findById(dummyShowTimeId.id).awaitFirst()
             )

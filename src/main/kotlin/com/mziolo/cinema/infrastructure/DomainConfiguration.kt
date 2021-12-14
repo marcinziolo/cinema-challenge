@@ -4,7 +4,6 @@ import com.mziolo.cinema.domain.catalog.InitializeMovieCatalog
 import com.mziolo.cinema.domain.catalog.MovieCatalog
 import com.mziolo.cinema.domain.catalog.initializeMovieCatalogPrototype
 import com.mziolo.cinema.domain.showtime.UpdateShowTime
-import com.mziolo.cinema.domain.showtime.updateRuntime
 import com.mziolo.cinema.domain.showtime.updateShowTimePrototype
 import com.mziolo.cinema.infrastructure.catalog.FetchImdbIdsAdapter
 import com.mziolo.cinema.infrastructure.catalog.FetchMovieAdapter
@@ -33,6 +32,6 @@ class DomainConfiguration {
         fetchShowTimes: FetchShowTimesAdapter,
         saveShowTime: SaveShowTimeAdapter,
         movieCatalog: MovieCatalog
-    ): UpdateShowTime = updateShowTimePrototype(fetchShowTimes.updateRuntime(movieCatalog), saveShowTime)
+    ): UpdateShowTime = updateShowTimePrototype(fetchShowTimes, saveShowTime)
 
 }

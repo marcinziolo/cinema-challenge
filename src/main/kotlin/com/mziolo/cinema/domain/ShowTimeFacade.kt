@@ -12,9 +12,12 @@ class ShowTimeFacade(
     private val movieCatalog: MovieCatalog
 ) {
     suspend fun updateShowTime(showTime: ShowTime) {
-        movieCatalog contains showTime.movieId then {
-            val showTimeWithRuntime = showTime.copy(runtime = movieCatalog.getMovie(showTime.movieId).runtimeInMinutes)
-            _updateShowTime(showTimeWithRuntime)
+        val movieId = showTime.movieId
+        val movie = movieCatalog.getMovie(movieId)
+        movieCatalog contains movieId then {
+            showTime runtimeIsEnoughLongerThan movie then {
+                _updateShowTime(showTime)
+            }
         }
     }
 

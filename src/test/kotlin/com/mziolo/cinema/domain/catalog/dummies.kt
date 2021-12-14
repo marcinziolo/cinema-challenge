@@ -10,7 +10,7 @@ internal val dummyMovie = Movie(
     description = "Los Angeles police officer Brian O'Conner...",
     releaseYear = 2001,
     imdbRating = 7.6,
-    runtimeInMinutes = 106
+    runtime = 106
 )
 internal val dummyCatalog = MovieCatalog(mapOf(dummyMovieId to dummyMovie))
 

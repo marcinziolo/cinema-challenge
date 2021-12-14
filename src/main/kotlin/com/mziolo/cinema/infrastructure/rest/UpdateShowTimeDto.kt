@@ -7,5 +7,6 @@ data class UpdateShowTimeDto(
     val movieId: UUID,
     val day: String,
     val time: String,
-    val price: String
+    val price: String,
+    val runtime: Int
 )

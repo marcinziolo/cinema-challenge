@@ -19,5 +19,6 @@ private fun ShowTime.toDocument(): ShowTimeDocument = ShowTimeDocument(
     movieId = this.movieId.id,
     date = this.date.date.toString(),
     time = this.time.toString(),
-    price = this.price
+    price = this.price,
+    runtime = this.runtime
 )

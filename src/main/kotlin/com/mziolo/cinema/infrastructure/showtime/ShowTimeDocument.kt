@@ -11,5 +11,6 @@ data class ShowTimeDocument(
     val time: String,
     val date: String,
     val movieId: UUID,
-    val price: BigDecimal
+    val price: BigDecimal,
+    val runtime: Int
 )

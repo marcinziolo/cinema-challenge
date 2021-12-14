@@ -25,7 +25,7 @@ class FetchMovieAdapterTest : SpringAbstractTest() {
             releaseYear = 2001,
             description = plot,
             imdbRating = 6.8,
-            runtimeInMinutes = 106
+            runtime = 106
         )
 
         runBlocking {

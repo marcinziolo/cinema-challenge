@@ -23,11 +23,11 @@ class FetchShowTimesAdapter(
         .map(ShowTimeDocument::toModel)
 }
 
-private fun ShowTimeDocument.toModel(): ShowTime = ShowTime(
+private fun ShowTimeDocument.toModel() = ShowTime(
     showTimeId = ShowTimeId(this.id),
     movieId = MovieId(this.movieId),
     date = ShowTimeDate(LocalDate.parse(this.date)),
     time = LocalTime.parse(this.time),
     price = this.price,
-    runtime = null
+    runtime = this.runtime
 )

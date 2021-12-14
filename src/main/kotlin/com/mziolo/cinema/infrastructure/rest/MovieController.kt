@@ -46,7 +46,7 @@ class MovieController(private val movieFacade: MovieFacade) {
             releaseYear = movie.releaseYear,
             imdbRating = movie.imdbRating,
             userRating = userRating,
-            runtimeInMinutes = movie.runtimeInMinutes
+            runtimeInMinutes = movie.runtime
         )
     }
 }

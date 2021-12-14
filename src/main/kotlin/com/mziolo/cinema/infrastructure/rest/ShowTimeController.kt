@@ -7,6 +7,7 @@ import com.mziolo.cinema.domain.showtime.ShowTime
 import com.mziolo.cinema.domain.showtime.ShowTimeDate
 import com.mziolo.cinema.domain.showtime.ShowTimeId
 import com.mziolo.cinema.domain.showtime.ShowTimeOverlapped
+import com.mziolo.cinema.domain.showtime.TooShortRuntime
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
@@ -43,6 +44,9 @@ class ShowTimeController(
 
     @ExceptionHandler(InvalidMovieId::class)
     fun handleInvalidMovieId(): ResponseEntity<Unit> = ResponseEntity.status(404).build()
+
+    @ExceptionHandler(TooShortRuntime::class)
+    fun handleTooShortRuntime(): ResponseEntity<Unit> = ResponseEntity.status(400).build()
 }
 
 private fun UpdateShowTimeDto.toShowTime(id: UUID): ShowTime {
@@ -52,7 +56,7 @@ private fun UpdateShowTimeDto.toShowTime(id: UUID): ShowTime {
         time = LocalTime.parse(this.time),
         date = ShowTimeDate(LocalDate.parse(this.day)),
         price = BigDecimal(this.price),
-        runtime = null
+        runtime = runtime
     )
 }
 

@@ -1,6 +1,7 @@
 package com.mziolo.cinema.e2e
 
 import com.mziolo.cinema.SpringMongoDbTest
+import com.mziolo.cinema.domain.catalog.dummyMovie
 import com.mziolo.cinema.domain.catalog.dummyMovieId
 import com.mziolo.cinema.domain.showtime.anotherDummyShowTimeId
 import com.mziolo.cinema.domain.showtime.dummyShowTime
@@ -26,12 +27,13 @@ class E2EFlowTest : SpringMongoDbTest() {
     @Test
     internal fun shouldProcessSteps() {
 
-        // add beginning there is no ratings
+        // at beginning there is no ratings
         getMovieAndAssertUserRating("n/a")
 
         voteForMovie(3)
         voteForMovie(4)
 
+        //after two votes - average was returned
         getMovieAndAssertUserRating("3.5")
 
         // no show times at beginning
@@ -81,12 +83,16 @@ class E2EFlowTest : SpringMongoDbTest() {
             .jsonPath("$.[1].showTimeId").isEqualTo(anotherShowTimeId)
             .jsonPath("$.[1].time").isEqualTo("20:00")
 
+        //too short runtime
+        updateShowTime(anotherShowTimeId, "21:00", runtime = dummyMovie.runtime)
+            .expectStatus().isBadRequest
+
     }
 
     private fun fetchShowTimes(date: String) =
         webTestClient.get().uri("/showtime/$date").exchange()
 
-    private fun updateShowTime(showTimeId: String, time: String) =
+    private fun updateShowTime(showTimeId: String, time: String, runtime: Int = dummyMovie.runtime + 30) =
         webTestClient.put().uri("/showtime/$showTimeId").contentType(MediaType.APPLICATION_JSON).body(
             BodyInserters.fromValue(
                 """
@@ -94,7 +100,8 @@ class E2EFlowTest : SpringMongoDbTest() {
                         "movieId": "$movieId",
                         "day": "$date",
                         "time": "$time",
-                        "price": "20"
+                        "price": "20",
+                        "runtime": $runtime
                     }
                 """.trimIndent()
             )

@@ -5,7 +5,6 @@ import com.mziolo.cinema.domain.RatingFacade
 import com.mziolo.cinema.domain.ShowTimeFacade
 import com.mziolo.cinema.domain.catalog.MovieCatalog
 import com.mziolo.cinema.domain.showtime.UpdateShowTime
-import com.mziolo.cinema.domain.showtime.updateRuntime
 import com.mziolo.cinema.infrastructure.rating.GetRatingsAdapter
 import com.mziolo.cinema.infrastructure.rating.RateMovieAdapter
 import com.mziolo.cinema.infrastructure.showtime.FetchShowTimesAdapter
@@ -32,5 +31,5 @@ class FlowsConfiguration {
         updateShowTime: UpdateShowTime,
         fetchShowTimes: FetchShowTimesAdapter,
         movieCatalog: MovieCatalog
-    ) = ShowTimeFacade(updateShowTime, fetchShowTimes.updateRuntime(movieCatalog), movieCatalog)
+    ) = ShowTimeFacade(updateShowTime, fetchShowTimes, movieCatalog)
 }

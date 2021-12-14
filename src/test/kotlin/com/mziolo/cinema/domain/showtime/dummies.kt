@@ -12,11 +12,12 @@ val anotherDummyShowTimeId = ShowTimeId(UUID.fromString("12392b03-b687-44d7-a842
 val dummyTime = LocalTime.of(18, 0)
 val dummyDate = ShowTimeDate(LocalDate.of(2021, 12, 12))
 val dummyPrice = BigDecimal("20")
+const val dummyRequiredBreak = 20
 val dummyShowTime = ShowTime(
     showTimeId = dummyShowTimeId,
     movieId = dummyMovieId,
     time = dummyTime,
     date = dummyDate,
     price = dummyPrice,
-    runtime = dummyMovie.runtimeInMinutes
+    runtime = dummyMovie.runtime + dummyRequiredBreak
 )
